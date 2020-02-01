@@ -19,8 +19,8 @@ public class FoodDatabase extends SQLiteOpenHelper {
         super(context, DATABASE_NAME, factory, DATABASE_VERSION);
     }
 
-    public void onCreate(SQLDatabase db) {
-        String CREATE_TABLE = "CREATE TABLE" + TABLE_NAME + "(" + COLUMN_TYPE +
+    public void onCreate(SQLiteDatabase db) {
+        String CREATE_TABLE = "CREATE TABLE " + TABLE_NAME + "(" + COLUMN_TYPE +
                 "INTEGER PRIMARYKEY," + COLUMN_CO2 + "INTEGER," + COLUMN_NAME + "TEXT )";
         db.execSQL(CREATE_TABLE);
     }
@@ -45,18 +45,32 @@ public class FoodDatabase extends SQLiteOpenHelper {
 
     public void addHandler(Food food) {
         ContentValues values = new ContentValues();
-        values.put(COLUMN_TYPE, Food.);
-        values.put(COLUMN_CO2, student.getID());
-        values.put(COLUMN_NAME, student.getStudentName());
+        values.put(COLUMN_TYPE, Food.getType());
+        values.put(COLUMN_CO2, Food.getCarbonDioxide());
+        values.put(COLUMN_NAME, Food.getName());
         SQLiteDatabase db = this.getWritableDatabase();
         db.insert(TABLE_NAME, null, values);
         db.close();
     }
 
-    public Food findHandler(String studentname) {}
+    public Food findHandler(String foodItem) {
+        String query = "Select * FROM " + TABLE_NAME + "WHERE" + COLUMN_NAME + " = " + "'" + foodItem + "'";
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(query, null);
+        Food food = new Food();
+        if (cursor.moveToFirst()) {
+            cursor.moveToFirst();
+            Food.setType(cursor.getString(1));
+            Food.setCarbonDioxide(Integer.parseInt(cursor.getString(0)));
+            Food.setName(cursor.getString(1));
+            cursor.close();
+        } else {
+            food = null;
+        }
+        db.close();
+        return food;
+    }
 
-    public boolean deleteHandler(int ID) {}
-
-    public boolean updateHandler(int ID, String name) {}
+    //public boolean updateHandler(int ID, String name) {}
 
 }
