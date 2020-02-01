@@ -5,12 +5,12 @@ public class Food {
 
     // fields
     private String name;
-    private float carbonDioxide;
+    private double carbonDioxide;
     private String type;
 
     // constructors
     public Food() {}
-    public Food(String name, float carbonDioxide, String type) {
+    public Food(String name, double carbonDioxide, String type) {
         this.name = name;
         this.carbonDioxide = carbonDioxide;
         this.type = type;
@@ -28,7 +28,7 @@ public class Food {
         this.carbonDioxide = carbonDioxide;
     }
 
-    public float getCarbonDioxide() {
+    public double getCarbonDioxide() {
         return this.carbonDioxide;
     }
 
