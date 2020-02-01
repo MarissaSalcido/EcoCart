@@ -88,21 +88,24 @@ public class FoodDatabase extends SQLiteOpenHelper {
         }
     }
 
-    public ArrayList<String> loadList(String type) {
-        ArrayList<String> result = new ArrayList(1);
+    public ArrayList<Food> loadList(String type) {
+        ArrayList<Food> result = new ArrayList(1);
         String query = "Select * FROM " + TABLE_NAME + " WHERE " + COLUMN_TYPE + " = " + "'" + type + "'";
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(query, null);
+        Food food = new Food();
         while (cursor.moveToNext()) {
-            int result_0 = cursor.getInt(0);
-            String result_1 = cursor.getString(1);
-            result.add(String.valueOf(result_0) + " " + result_1 +
-                    System.getProperty("line.separator"));
+            food.setType(cursor.getString(0));
+            food.setCarbonDioxide(Integer.parseInt(cursor.getString(1)));
+            food.setName(cursor.getString(2));
+            result.add(food);
+            cursor.close();
         }
         cursor.close();
         db.close();
         return result;
     }
+
     //public boolean updateHandler(int ID, String name) {}
 
 }
