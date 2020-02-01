@@ -39,4 +39,9 @@ public class Food {
     public String getType() {
         return this.type;
     }
+
+    public String toString()
+    {
+        return (this.name + ": " + "carbonDioxide: " + this.carbonDioxide);
+    }
 }

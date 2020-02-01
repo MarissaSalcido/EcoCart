@@ -9,14 +9,15 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.ViewHolder> {
 
 
-    private final List<Food> foods;
+    private final ArrayList<String> foods;
 
-    public FoodAdapter(List<Food> foods) {
+    public FoodAdapter(ArrayList<String> foods) {
         this.foods = foods;
 
     }
