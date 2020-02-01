@@ -15,9 +15,9 @@ import java.util.List;
 public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.ViewHolder> {
 
 
-    private final ArrayList<String> foods;
+    private final List<Food> foods;
 
-    public FoodAdapter(ArrayList<String> foods) {
+    public FoodAdapter(List<Food> foods) {
         this.foods = foods;
 
     }
