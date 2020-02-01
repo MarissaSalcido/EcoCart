@@ -27,5 +27,6 @@ public class MainActivity extends AppCompatActivity {
         String text = nameField.getText().toString().replace("name", name);
         Log.i("TAG", text);
         nameField.setText(text);
+
     }
 }
