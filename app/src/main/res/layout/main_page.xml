@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F8F1E4"
+    android:background="#A1C9C5"
     tools:context=".MainActivity">
 
     <ImageView
@@ -21,56 +21,81 @@
 
     <TextView
         android:id="@+id/welcome"
-        android:layout_width="359dp"
-        android:layout_height="34dp"
+        android:layout_width="355dp"
+        android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginStart="26dp"
+        android:layout_marginStart="25dp"
         android:layout_marginTop="72dp"
         android:gravity="center"
-        android:text="Welcome to EcoCart!"
+        android:text="Let's see how you can reduce your carbon footprint"
         android:textColor="#000000"
-        android:textSize="30sp" />
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/welcome2"
+        android:layout_width="355dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="389dp"
+        android:gravity="center"
+        android:text="Click on the categories you want to view"
+        android:textColor="#000000"
+        android:textSize="20sp" />
 
     <TextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/imageView2"
         android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginStart="80dp"
-        android:layout_marginTop="342dp"
+        android:layout_centerInParent="true"
+        android:layout_marginStart="143dp"
+        android:layout_marginTop="35dp"
         android:background="#F8F1E4"
-        android:text="Hello, what's your name?"
+        android:gravity="center"
+        android:text="Hello, name!"
         android:textColor="@android:color/black"
         android:textSize="24sp" />
 
-    <EditText
-        android:id="@+id/nameInput"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
+    <Button
+        android:id="@+id/button"
+        android:layout_width="110dp"
+        android:layout_height="72dp"
+        android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginStart="99dp"
-        android:layout_marginBottom="267dp"
-        android:ems="10"
+        android:layout_marginEnd="140dp"
+        android:layout_marginBottom="190dp"
+        android:background="@drawable/button"
         android:gravity="center"
-        android:hint="Enter your name here"
-        android:inputType="textPersonName" />
+        android:text="Button" />
 
-    <ImageButton
-        android:id="@+id/goToMainButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/textView"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="56dp"
-        android:layout_toEndOf="@+id/nameInput"
-        android:background="@android:color/transparent"
-        android:rotation="180"
-        app:srcCompat="?attr/actionModeCloseDrawable" />
+    <Button
+        android:id="@+id/button4"
+        android:layout_width="110dp"
+        android:layout_height="72dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="140dp"
+        android:layout_marginBottom="100dp"
+        android:background="@drawable/button"
+        android:gravity="center"
+        android:text="Button" />
+
+    <Button
+        android:id="@+id/button5"
+        android:layout_width="110dp"
+        android:layout_height="72dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="140dp"
+        android:layout_marginBottom="12dp"
+        android:background="@drawable/button"
+        android:gravity="center"
+        android:text="Button" />
 
 </RelativeLayout>
