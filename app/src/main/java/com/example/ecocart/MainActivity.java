@@ -37,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, CategoryActivity.class);
-                intent.putExtra("foodType", "carb");
+                intent.putExtra("foodType", "Carb");
                 startActivity(intent);
             }
         });
@@ -46,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, CategoryActivity.class);
-                intent.putExtra("foodType", "protein");
+                intent.putExtra("foodType", "Protein");
                 startActivity(intent);
             }
         });
@@ -55,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, CategoryActivity.class);
-                intent.putExtra("foodType", "fat");
+                intent.putExtra("foodType", "Fat");
                 startActivity(intent);
             }
         });

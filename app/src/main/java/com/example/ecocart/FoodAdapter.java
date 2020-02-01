@@ -25,7 +25,7 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.ViewHolder> {
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
-        View foodsView = LayoutInflater.from(parent.getContext()).inflate(android.R.layout.simple_list_item_1, parent, false);
+        View foodsView = LayoutInflater.from(parent.getContext()).inflate(R.layout.food, parent, false);
 
         return new ViewHolder(foodsView);
     }
@@ -33,7 +33,8 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.ViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 
-        String food = String.valueOf(foods.get(position)); // might need to fix
+        //String food = String.valueOf(foods.get(position)); // might need to fix
+        String food = foods.get(position).getName();
         holder.bind(food);
     }
 
@@ -44,16 +45,17 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.ViewHolder> {
 
     class ViewHolder extends RecyclerView.ViewHolder {
 
-        TextView tvFood;
+        TextView tvFoodText;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            tvFood = itemView.findViewById(android.R.id.text1);
+            tvFoodText = itemView.findViewById(R.id.tvFoodText);
 
         }
 
         public void bind(String food) {
-            tvFood.setText(food);
+
+            tvFoodText.setText(food);
         }
     }
 }
