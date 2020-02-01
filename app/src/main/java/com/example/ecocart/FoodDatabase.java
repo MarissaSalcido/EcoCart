@@ -74,3 +74,4 @@ public class FoodDatabase extends SQLiteOpenHelper {
     //public boolean updateHandler(int ID, String name) {}
 
 }
+
