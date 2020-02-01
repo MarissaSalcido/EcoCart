@@ -24,6 +24,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         nameField = findViewById(R.id.nameField);
         String name = getIntent().getStringExtra("name");
-        nameField.setText(name);
+        String text = nameField.getText().toString().replace("name", name);
+        Log.i("TAG", text);
+        nameField.setText(text);
     }
 }
