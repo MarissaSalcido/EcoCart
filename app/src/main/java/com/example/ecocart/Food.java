@@ -3,23 +3,23 @@ package com.example.ecocart;
 public class Food {
 
     // fields
-    private string name;
+    private String name;
     private float carbonDioxide;
-    private string type;
+    private String type;
 
     // constructors
     public Food() {}
-    public Food(string name, float carbonDioxide, string type) {
+    public Food(String name, float carbonDioxide, String type) {
         this.name = name;
         this.carbonDioxide = carbonDioxide;
         this.type = type;
     }
 
-    public void setName(string name) {
+    public void setName(String name) {
         this.name = name;
     }
 
-    public string getName() {
+    public String getName() {
         return this.name;
     }
 
@@ -31,11 +31,11 @@ public class Food {
         return this.carbonDioxide;
     }
 
-    public void setType(string type) {
+    public void setType(String type) {
         this.type = type;
     }
 
-    public string getType() {
+    public String getType() {
         return this.type;
     }
 }
