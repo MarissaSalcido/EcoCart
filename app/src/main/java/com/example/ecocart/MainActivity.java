@@ -9,13 +9,13 @@ import android.widget.Button;
 public class MainActivity extends AppCompatActivity {
     public static final String hi = "hi";
     String hello;
-    //public Button actionButton = carb, fat, protein;
+    public Button carb, fat, protein;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.start_page);
 
-        Button carb = (Button) findViewById(R.id.carbButton);
+        carb = (Button) findViewById(R.id.carbButton);
         carb.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 System.out.println();
@@ -23,7 +23,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        Button fat = (Button) findViewById(R.id.fatButton);
+        fat = (Button) findViewById(R.id.fatButton);
         carb.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 System.out.println();
@@ -31,7 +31,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        Button protein = (Button) findViewById(R.id.proteinButton);
+        protein = (Button) findViewById(R.id.proteinButton);
         carb.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 System.out.println();
