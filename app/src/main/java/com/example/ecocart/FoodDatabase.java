@@ -45,9 +45,9 @@ public class FoodDatabase extends SQLiteOpenHelper {
 
     public void addHandler(Food food) {
         ContentValues values = new ContentValues();
-        values.put(COLUMN_TYPE, Food.getType());
-        values.put(COLUMN_CO2, Food.getCarbonDioxide());
-        values.put(COLUMN_NAME, Food.getName());
+        values.put(COLUMN_TYPE, food.getType());
+        values.put(COLUMN_CO2, food.getCarbonDioxide());
+        values.put(COLUMN_NAME, food.getName());
         SQLiteDatabase db = this.getWritableDatabase();
         db.insert(TABLE_NAME, null, values);
         db.close();
@@ -60,9 +60,9 @@ public class FoodDatabase extends SQLiteOpenHelper {
         Food food = new Food();
         if (cursor.moveToFirst()) {
             cursor.moveToFirst();
-            Food.setType(cursor.getString(1));
-            Food.setCarbonDioxide(Integer.parseInt(cursor.getString(0)));
-            Food.setName(cursor.getString(1));
+            food.setType(cursor.getString(1));
+            food.setCarbonDioxide(Integer.parseInt(cursor.getString(0)));
+            food.setName(cursor.getString(1));
             cursor.close();
         } else {
             food = null;
