@@ -10,15 +10,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ShoppingCartActivity extends AppCompatActivity {
+    List<Food> shoppingCart = new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_shopping_cart);
 
+        /*
         Intent intent = getIntent();
         FoodWrapper shoppingCartFoodWrapper = (FoodWrapper) intent.getSerializableExtra("shoppingCart");
-        List<Food> shoppingCart = shoppingCartFoodWrapper.getFoods();
-
+        List<Food> shoppingCart_ = shoppingCartFoodWrapper.getFoods();
+        shoppingCart.addAll(shoppingCart_);
         System.out.println(shoppingCart.size());
+
+         */
     }
 }

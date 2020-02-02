@@ -16,20 +16,18 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.ViewHolder> {
+public class ShoppingCartAdapter extends RecyclerView.Adapter<ShoppingCartAdapter.ViewHolder> {
 
 
     private final List<Food> foods;
-    List<String> shoppingCart;
     public ImageView addItemButton;
 
     Context context;
 
 
-    public FoodAdapter(Context context, List<Food> foods, List<String> shoppingCart) {
+    public ShoppingCartAdapter(Context context, List<Food> foods) {
         this.foods = foods;
         this.context = context;
-        this.shoppingCart = shoppingCart;
 
     }
 
@@ -37,7 +35,7 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.ViewHolder> {
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
-        View foodsView = LayoutInflater.from(parent.getContext()).inflate(R.layout.food, parent, false);
+        View foodsView = LayoutInflater.from(parent.getContext()).inflate(R.layout.cart_items, parent, false);
 
         return new ViewHolder(foodsView);
     }
@@ -68,7 +66,21 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.ViewHolder> {
             addItemButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    shoppingCart.add(tvFoodText.getText().toString());//Create another table for shopping cart
+                    // do your stuffs
+//                    Log.d("TEST", "clicked");
+//                    System.out.println(v);
+//                    System.out.println(this);
+//                    System.out.println(tvFoodText);
+//
+//                    System.out.println();
+
+//                    View test = (View) v.getParent();
+//                    test.findViewById(R.id.tvFoodText);
+//                    System.out.println(test);
+
+                    Intent intent = new Intent("add-food");
+                    intent.putExtra("item", tvFoodText.getText());
+                    LocalBroadcastManager.getInstance(context).sendBroadcast(intent);
                 }
             });
 

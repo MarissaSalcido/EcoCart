@@ -26,7 +26,7 @@ public class CategoryActivity extends AppCompatActivity {
     FoodAdapter adapter;
     TextView foodTypeTitle;
     ImageButton shoppingCartButton;
-    ArrayList<Food> shoppingCart;
+    ArrayList<String> shoppingCart;
     ImageButton addItemButton;
 
     @Override
@@ -48,7 +48,7 @@ public class CategoryActivity extends AppCompatActivity {
         foods.clear();
         foods.addAll(specifiedFoods);
 
-        adapter = new FoodAdapter(this, specifiedFoods);
+        adapter = new FoodAdapter(this, specifiedFoods, shoppingCart);
         LinearLayoutManager layoutManager = new LinearLayoutManager((this));
         rvFoods.setLayoutManager(layoutManager);
         rvFoods.setAdapter(adapter);
@@ -58,8 +58,8 @@ public class CategoryActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(CategoryActivity.this, ShoppingCartActivity.class);
                 //set up bundle to add shopping cart list, pass bundle to next activity
-                FoodWrapper shoppingCartWrapper = new FoodWrapper(foods);
-                intent.putExtra("shoppingCart", shoppingCartWrapper);
+                /*FoodWrapper shoppingCartWrapper = new FoodWrapper(foods);
+                intent.putExtra("shoppingCart", shoppingCartWrapper);*/
                 startActivity(intent);
             }
         });
