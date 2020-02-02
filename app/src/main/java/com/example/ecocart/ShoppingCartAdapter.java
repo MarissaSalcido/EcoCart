@@ -24,7 +24,6 @@ public class ShoppingCartAdapter extends RecyclerView.Adapter<ShoppingCartAdapte
 
     public ShoppingCartAdapter(Context context) {
         this.context = context;
-        SQLiteDatabase db =
 
     }
 
