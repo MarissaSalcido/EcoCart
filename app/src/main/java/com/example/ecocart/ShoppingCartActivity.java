@@ -25,7 +25,7 @@ public class ShoppingCartActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_shopping_cart);
 
-        /*
+
         String foodType = getIntent().getStringExtra("foodType");
 
 
@@ -33,7 +33,7 @@ public class ShoppingCartActivity extends AppCompatActivity {
         LinearLayoutManager layoutManager = new LinearLayoutManager((this));
         rvshopping.setLayoutManager(layoutManager);
         rvshopping.setAdapter(adapter);
-        */
+
 
         donebtn = findViewById(R.id.donebtn);
 
