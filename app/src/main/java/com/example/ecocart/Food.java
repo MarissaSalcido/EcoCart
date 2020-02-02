@@ -24,7 +24,7 @@ public class Food {
         return this.name;
     }
 
-    public void setCarbonDioxide(float carbonDioxide) {
+    public void setCarbonDioxide(double carbonDioxide) {
         this.carbonDioxide = carbonDioxide;
     }
 
