@@ -1,12 +1,14 @@
 
 package com.example.ecocart;
 
+import org.parceler.Parcel;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Food implements Serializable {
+@Parcel
+public class Food {
 
-    private static final long serialVersionUID = 1L;
 
     // fields
     private String name;

@@ -31,9 +31,9 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/textView2"
         android:layout_alignParentEnd="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="12dp"
-        android:layout_marginEnd="81dp"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="14dp"
+        android:layout_marginEnd="135dp"
         android:ems="10"
         android:gravity="center"
         android:hint="Enter your name"
@@ -41,7 +41,7 @@
 
     <TextView
         android:id="@+id/textView2"
-        android:layout_width="259dp"
+        android:layout_width="289dp"
         android:layout_height="wrap_content"
         android:layout_below="@+id/imageView2"
         android:layout_alignParentStart="true"
@@ -56,13 +56,13 @@
 
     <Button
         android:id="@+id/goButton"
-        android:layout_width="wrap_content"
+        android:layout_width="66dp"
         android:layout_height="wrap_content"
         android:layout_alignTop="@+id/nameInput"
         android:layout_alignParentEnd="true"
-        android:layout_marginStart="-60dp"
-        android:layout_marginTop="0dp"
-        android:layout_marginEnd="10dp"
+        android:layout_marginStart="-120dp"
+        android:layout_marginTop="-5dp"
+        android:layout_marginEnd="33dp"
         android:layout_toEndOf="@+id/nameInput"
         android:text="Go" />
 
