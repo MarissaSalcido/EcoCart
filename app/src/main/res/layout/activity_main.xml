@@ -57,7 +57,7 @@
         android:layout_marginStart="43dp"
         android:layout_marginBottom="269dp"
         android:gravity="center"
-        android:text="Hello, name! To see how to reduce your food cabon footprint, click on one of the following:"
+        android:text="Hello, name! To see how to reduce your food carbon footprint, click on one of the following:"
         android:textColor="#FD030303"
         android:textSize="20sp" />
 
