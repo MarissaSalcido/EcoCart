@@ -101,7 +101,7 @@ public class ShoppingCartAdapter extends RecyclerView.Adapter<ShoppingCartAdapte
                 tvFoodText5.setText("The item you chose is already the best option!");
             }
             else{
-                tvFoodText5.setText(tvFoodText5.getText().toString() + " " +Double.toString((item.getCarbonDioxide()*item.getCount()) - (alternative.getCarbonDioxide()*item.getCount())));
+                tvFoodText5.setText(tvFoodText5.getText().toString());
             }
         }
 
