@@ -22,7 +22,7 @@ import java.util.List;
 public class CategoryActivity extends AppCompatActivity {
     RecyclerView rvFoods;
     List<Food> foods = new ArrayList<>();
-
+    FoodDatabase foodDatabase;
     FoodAdapter adapter;
     TextView foodTypeTitle;
     ImageButton shoppingCartButton;
@@ -42,8 +42,9 @@ public class CategoryActivity extends AppCompatActivity {
         rvFoods = findViewById(R.id.rvfood);
         List<Food> specifiedFoods = new ArrayList<>();
         FoodDatabase foodDatabase = new FoodDatabase(this, null, null, 17);
-        foodDatabase.addAll();
-        specifiedFoods.addAll(foodDatabase.loadList(foodType)); System.out.println(specifiedFoods.size());
+        this.foodDatabase = foodDatabase;
+        this.foodDatabase.addAll();
+        specifiedFoods.addAll(this.foodDatabase.loadList(foodType));
 
         foods.clear();
         foods.addAll(specifiedFoods);
@@ -57,20 +58,12 @@ public class CategoryActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(CategoryActivity.this, ShoppingCartActivity.class);
+                //send fooddb in bundle to next activity
                 startActivity(intent);
             }
         });
 
 
     }
-
-    public BroadcastReceiver mMessageReceiver = new BroadcastReceiver() {
-        @Override
-        public void onReceive(Context context, Intent intent) {
-            // Get extra data included in the Intent
-            String ItemName = intent.getStringExtra("item");
-            //if ()
-        }
-    };
 
 }

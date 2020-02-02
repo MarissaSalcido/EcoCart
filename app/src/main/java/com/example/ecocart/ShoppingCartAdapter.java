@@ -1,8 +1,6 @@
 package com.example.ecocart;
 
 import android.content.Context;
-import android.content.Intent;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,23 +8,20 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.util.ArrayList;
+import org.w3c.dom.Text;
+
 import java.util.List;
 
 public class ShoppingCartAdapter extends RecyclerView.Adapter<ShoppingCartAdapter.ViewHolder> {
 
-
-    private final List<Food> foods;
+    List<ShoppingCartItem> cart;
     public ImageView addItemButton;
-
     Context context;
 
 
-    public ShoppingCartAdapter(Context context, List<Food> foods) {
-        this.foods = foods;
+    public ShoppingCartAdapter(Context context) {
         this.context = context;
 
     }
@@ -43,30 +38,38 @@ public class ShoppingCartAdapter extends RecyclerView.Adapter<ShoppingCartAdapte
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 
-        //String food = String.valueOf(foods.get(position)); // might need to fix
-        String food = foods.get(position).getName();
-        holder.bind(food);
+        ShoppingCartItem item = cart.get(position);
+        holder.bind(item);
     }
 
     @Override
     public int getItemCount() {
-        return foods.size();
+        return cart.size();
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {
 
         TextView tvFoodText;
 
+        TextView tvCartItemCurrent;
+        TextView tvCartItemAlt;
+        TextView tvCartItemCurrentCo2;
+        TextView tvCartItemAltCo2;
+
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            tvFoodText = itemView.findViewById(R.id.tvFoodText);
+            tvFoodText = itemView.findViewById(R.id.tvCartItemCurrent);
+            tvCartItemCurrent = itemView.findViewById(R.id.tvCartItemCurrent);
+            tvCartItemAlt = itemView.findViewById(R.id.tvCartItemAlt);
+            tvCartItemCurrentCo2 = itemView.findViewById(R.id.tvCartItemCurrentCo2);
+            tvCartItemAltCo2 = itemView.findViewById(R.id.tvCartItemAltCo2);
+
             addItemButton = itemView.findViewById(R.id.addItemButton);
-
-
             addItemButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     String item = tvFoodText.getText().toString();
+
                     //database instance of fooddb
                     //query for the item and create food object
                     //insert into shoppingcart table
@@ -76,7 +79,13 @@ public class ShoppingCartAdapter extends RecyclerView.Adapter<ShoppingCartAdapte
 
         }
 
-        public void bind(String food) {
+        public void bind(ShoppingCartItem item) {
+
+            tvCartItemCurrent.setText(item.getName());
+            tvCartItemCurrentCo2.setText(Double.toString(item.getCarbonDioxide()));
+            //calculate what alternatives to display to ItemAlt and its co2
+
+
         }
 
     }
