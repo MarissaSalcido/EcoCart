@@ -43,7 +43,7 @@ public class CategoryActivity extends AppCompatActivity {
         shoppingCartButton = findViewById(R.id.shoppingCartButton);
         rvFoods = findViewById(R.id.rvfood);
         List<Food> specifiedFoods = new ArrayList<>();
-        FoodDatabase foodDatabase = new FoodDatabase(this, null, null, 1);
+        FoodDatabase foodDatabase = new FoodDatabase(this, null, null, 12);
         Log.i("TAG", "Cat onCreate: " +foodDatabase.loadList(foodType));
         specifiedFoods.addAll(foods);
         adapter = new FoodAdapter(specifiedFoods);

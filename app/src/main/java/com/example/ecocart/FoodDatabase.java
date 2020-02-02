@@ -5,6 +5,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.content.Context;
 import android.content.ContentValues;
 import android.database.Cursor;
+import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -27,16 +28,20 @@ public class FoodDatabase extends SQLiteOpenHelper {
 
     public FoodDatabase(Context context, String name,
                        SQLiteDatabase.CursorFactory factory, int version) {
-        super(context, DATABASE_NAME, factory, DATABASE_VERSION);
+        super(context, DATABASE_NAME, factory, version);
     }
 
     public void onCreate(SQLiteDatabase db) {
         String CREATE_TABLE = "CREATE TABLE " + TABLE_NAME + "(" + COLUMN_TYPE +
-                "TEXT," + COLUMN_CO2 + "INTEGER," + COLUMN_NAME + "TEXT )";
+                " TEXT," + COLUMN_CO2 + " INTEGER," + COLUMN_NAME + " TEXT )";
         db.execSQL(CREATE_TABLE);
+        addAll();
     }
 
-    public void onUpgrade(SQLiteDatabase db, int i, int i1) {}
+    public void onUpgrade(SQLiteDatabase db, int i, int i1) {
+        db.execSQL("DROP TABLE IF EXISTS "+ TABLE_NAME);
+        onCreate(db);
+    }
 
     public String loadHandler() {
         String result = "";
@@ -54,14 +59,14 @@ public class FoodDatabase extends SQLiteOpenHelper {
         return result;
     }
 
-    public void addHandler(Food food) {
+    public void addHandler(Food food, SQLiteDatabase db) {
         ContentValues values = new ContentValues();
         values.put(COLUMN_TYPE, food.getType());
         values.put(COLUMN_CO2, food.getCarbonDioxide());
         values.put(COLUMN_NAME, food.getName());
-        SQLiteDatabase db = this.getWritableDatabase();
+        //SQLiteDatabase db = this.getWritableDatabase();
         db.insert(TABLE_NAME, null, values);
-        db.close();
+
     }
 
     public Food findHandler(String foodItem) {
@@ -83,15 +88,19 @@ public class FoodDatabase extends SQLiteOpenHelper {
     }
 
     private void addAll(){
+        SQLiteDatabase db = this.getWritableDatabase();
         for(Food item: foods) {
-            addHandler(item);
+            addHandler(item, db);
         }
+        db.close();
     }
 
     public List<Food> loadList(String type) {
         List<Food> result = new ArrayList<>();
+
         String query = "Select * FROM " + TABLE_NAME + " WHERE " + COLUMN_TYPE + " = " + "'" + type + "'";
         SQLiteDatabase db = this.getWritableDatabase();
+
         Cursor cursor = db.rawQuery(query, null);
         cursor.moveToFirst();
         while (!cursor.isAfterLast()) {
