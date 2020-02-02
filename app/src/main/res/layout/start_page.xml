@@ -10,10 +10,11 @@
         android:id="@+id/textView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:fontFamily="casual"
         android:gravity="center"
         android:text="Welcome to EcoCart"
         android:textColor="#000000"
-        android:textSize="40sp"
+        android:textSize="30sp"
         android:textStyle="bold" />
 
     <ImageView
@@ -48,6 +49,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginStart="62dp"
         android:layout_marginTop="30dp"
+        android:fontFamily="casual"
         android:gravity="center"
         android:text="Hello, what's your name?"
         android:textColor="#0F0000"
@@ -65,5 +67,20 @@
         android:layout_marginEnd="33dp"
         android:layout_toEndOf="@+id/nameInput"
         android:text="Go" />
+
+    <TextView
+        android:id="@+id/CO2_DEF"
+        android:layout_width="330dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textView2"
+        android:layout_alignStart="@+id/nameInput"
+        android:layout_alignEnd="@+id/goButton"
+        android:layout_marginStart="-21dp"
+        android:layout_marginTop="111dp"
+        android:layout_marginEnd="5dp"
+        android:fontFamily="casual"
+        android:text="CO2 is a greenhouse gas. Emissions are the release of greenhouse gasses into the atmosphere over a specified area and period of time.  A person's carbon footprint is represented by the amount of carbon dioxide and other carbon compounds emitted, expressed here in kg of CO2 per kg of food item produced."
+        android:textColor="@android:color/black"
+        android:textSize="18sp" />
 
 </RelativeLayout>
