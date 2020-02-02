@@ -21,13 +21,7 @@ import java.util.List;
 
 public class CategoryActivity extends AppCompatActivity {
     RecyclerView rvFoods;
-    List<Food> foods =  new ArrayList<>(Arrays.asList(new Food("Lamb", 39.2, "Protein"), new Food("Beef", 27.2 , "Protein"),
-            new Food("Cheese", 13.5, "Fat"), new Food("Pork", 12.1, "Protein"), new Food("Farmed Salmon", 11.9, "Fat"),
-            new Food("Turkey", 10.9, "Protein"), new Food("Chicken", 6.9, "Protein"), new Food("Canned Tune", 6.1, "Fat"),
-            new Food("Eggs", 4.8, "Protein"), new Food("Potatoes", 2.9, "Carb"), new Food("Rice", 2.7, "Carb"),
-            new Food("Peanut Butter", 2.5, "Fat"), new Food("Nuts", 2.3, "Fat"), new Food("Yogurt", 2.2, "Fat"),
-            new Food("Broccoli", 2.0, "Carb"), new Food("Tofu", 2.0, "Protein"), new Food("Dried Beans", 2.0, "Protein"),
-            new Food("2% Milk", 1.9, "Protein"), new Food("Tomato", 1.1, "Carb"), new Food("Lentils", 0.9, "Protein")));
+    List<Food> foods = new ArrayList<Food>();
 
     FoodAdapter adapter;
     TextView foodTypeTitle;
@@ -49,6 +43,7 @@ public class CategoryActivity extends AppCompatActivity {
         List<Food> specifiedFoods = new ArrayList<>();
         FoodDatabase foodDatabase = new FoodDatabase(this, null, null, 16);
         foodDatabase.addAll();
+        foods.addAll(specifiedFoods);
         specifiedFoods.addAll(foodDatabase.loadList(foodType));
         adapter = new FoodAdapter(this, specifiedFoods);
         LinearLayoutManager layoutManager = new LinearLayoutManager((this));
@@ -65,8 +60,6 @@ public class CategoryActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
-
 
         LocalBroadcastManager.getInstance(this).registerReceiver(mMessageReceiver,
                 new IntentFilter("add-food"));
