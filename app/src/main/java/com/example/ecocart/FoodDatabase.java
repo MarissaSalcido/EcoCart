@@ -50,6 +50,39 @@ public class FoodDatabase extends SQLiteOpenHelper {
         onCreate(db);
     }
 
+    public ShoppingCartItem findHandler(String name) {
+        String query = "Select * FROM " + SHOPPING_TABLE_NAME + " WHERE " + SHOPPING_NAME + " = " + "'" + name + "'";
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(query, null);
+        ShoppingCartItem item = new ShoppingCartItem();
+        if (cursor.moveToFirst()) {
+            item.setType(cursor.getString(0));
+            item.setCarbonDioxide(Double.parseDouble(cursor.getString(1)));
+            item.setName(cursor.getString(2));
+            item.setCount(Integer.parseInt(cursor.getString(3)));
+            cursor.close();
+        } else { item = null;
+    }
+        db.close();
+    return item;
+    }
+
+    public Food getFoodItem(String name) {
+        String query = "Select * FROM " + SHOPPING_TABLE_NAME + " WHERE " + SHOPPING_NAME + " = " + "'" + name + "'";
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(query, null);
+        Food food = new Food();
+        if (cursor.moveToFirst()) {
+            food.setType(cursor.getString(0));
+            food.setCarbonDioxide(Double.parseDouble(cursor.getString(1)));
+            food.setName(cursor.getString(2));
+            cursor.close();
+        } else {
+            food = null;
+        }
+        return food;
+    }
+
     public void addHandler(Food food) {
         ContentValues values = new ContentValues();
         values.put(COLUMN_TYPE, food.getType());
