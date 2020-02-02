@@ -29,7 +29,7 @@ public class Food implements Serializable {
         return this.name;
     }
 
-    public void setCarbonDioxide(float carbonDioxide) {
+    public void setCarbonDioxide(double carbonDioxide) {
         this.carbonDioxide = carbonDioxide;
     }
 

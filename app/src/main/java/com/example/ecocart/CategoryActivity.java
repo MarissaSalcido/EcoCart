@@ -21,7 +21,7 @@ import java.util.List;
 
 public class CategoryActivity extends AppCompatActivity {
     RecyclerView rvFoods;
-    ArrayList<Food> foods =  new ArrayList<>(Arrays.asList(new Food("Lamb", 39.2, "Protein"), new Food("Beef", 27.2 , "Protein"),
+    List<Food> foods =  new ArrayList<>(Arrays.asList(new Food("Lamb", 39.2, "Protein"), new Food("Beef", 27.2 , "Protein"),
             new Food("Cheese", 13.5, "Fat"), new Food("Pork", 12.1, "Protein"), new Food("Farmed Salmon", 11.9, "Fat"),
             new Food("Turkey", 10.9, "Protein"), new Food("Chicken", 6.9, "Protein"), new Food("Canned Tune", 6.1, "Fat"),
             new Food("Eggs", 4.8, "Protein"), new Food("Potatoes", 2.9, "Carb"), new Food("Rice", 2.7, "Carb"),
@@ -47,9 +47,9 @@ public class CategoryActivity extends AppCompatActivity {
         shoppingCartButton = findViewById(R.id.shoppingCartButton);
         rvFoods = findViewById(R.id.rvfood);
         List<Food> specifiedFoods = new ArrayList<>();
-        //FoodDatabase foodDatabase = new FoodDatabase(this, null, null, 1);
-        //Log.i("TAG", "Cat onCreate: " +foodDatabase.loadList(foodType));
-        specifiedFoods.addAll(foods);
+        FoodDatabase foodDatabase = new FoodDatabase(this, null, null, 16);
+        foodDatabase.addAll();
+        specifiedFoods.addAll(foodDatabase.loadList(foodType));
         adapter = new FoodAdapter(this, specifiedFoods);
         LinearLayoutManager layoutManager = new LinearLayoutManager((this));
         rvFoods.setLayoutManager(layoutManager);

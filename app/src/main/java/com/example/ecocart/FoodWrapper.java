@@ -2,17 +2,18 @@ package com.example.ecocart;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
 
 public class FoodWrapper implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    private ArrayList<Food> foods;
+    private List<Food> foods;
 
-    public FoodWrapper(ArrayList<Food> foods) {
+    public FoodWrapper(List<Food> foods) {
         this.foods = foods;
     }
 
-    public ArrayList<Food> getFoods() {
+    public List<Food> getFoods() {
         return foods;
     }
 }
