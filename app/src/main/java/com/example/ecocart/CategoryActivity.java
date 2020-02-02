@@ -21,7 +21,7 @@ import java.util.List;
 
 public class CategoryActivity extends AppCompatActivity {
     RecyclerView rvFoods;
-    List<Food> foods = new ArrayList<Food>();
+    List<Food> foods = new ArrayList<>();
 
     FoodAdapter adapter;
     TextView foodTypeTitle;
@@ -41,10 +41,13 @@ public class CategoryActivity extends AppCompatActivity {
         shoppingCartButton = findViewById(R.id.shoppingCartButton);
         rvFoods = findViewById(R.id.rvfood);
         List<Food> specifiedFoods = new ArrayList<>();
-        FoodDatabase foodDatabase = new FoodDatabase(this, null, null, 16);
+        FoodDatabase foodDatabase = new FoodDatabase(this, null, null, 17);
         foodDatabase.addAll();
+        specifiedFoods.addAll(foodDatabase.loadList(foodType)); System.out.println(specifiedFoods.size());
+
+        foods.clear();
         foods.addAll(specifiedFoods);
-        specifiedFoods.addAll(foodDatabase.loadList(foodType));
+
         adapter = new FoodAdapter(this, specifiedFoods);
         LinearLayoutManager layoutManager = new LinearLayoutManager((this));
         rvFoods.setLayoutManager(layoutManager);
