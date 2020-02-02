@@ -56,6 +56,7 @@
         android:layout_centerInParent="true"
         android:layout_marginStart="43dp"
         android:layout_marginBottom="269dp"
+        android:fontFamily="casual"
         android:gravity="center"
         android:text="Hello, name! To see how to reduce your food carbon footprint, click on one of the following:"
         android:textColor="#FD030303"
