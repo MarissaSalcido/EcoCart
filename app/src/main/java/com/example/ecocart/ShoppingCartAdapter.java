@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -72,11 +73,16 @@ public class ShoppingCartAdapter extends RecyclerView.Adapter<ShoppingCartAdapte
                 public void onClick(View v) {
                     String item = tvFoodText.getText().toString();
                     FoodDatabase db = new FoodDatabase(context, null, null, 1);
-                    //ShoppingCartItem it = db.findHandler(item);
-                    //db.addToCart(it);
-                    //query for the item and create food object
-                    //insert into shoppingcart table
-
+                    Food food = db.getFoodItem(item);
+                    if (db.findHandler(item) == null){
+                        db.addToCart(new ShoppingCartItem(food.getName(), food.getCarbonDioxide(), food.getType(), 0));
+                    }
+                    else{
+                        ShoppingCartItem newItem = db.findHandler(item);
+                        db.removeFromCart(newItem.getName());
+                        db.addToCart(new ShoppingCartItem(newItem.getName(), newItem.getCarbonDioxide(), newItem.getType(), newItem.getCount()+1));
+                        Toast.makeText(context, "Updated shopping list!", Toast.LENGTH_SHORT).show();
+                    }
                 }
             });
 

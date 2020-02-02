@@ -69,7 +69,7 @@ public class FoodDatabase extends SQLiteOpenHelper implements Serializable {
     }
 
     public Food getFoodItem(String name) {
-        String query = "Select * FROM " + SHOPPING_TABLE_NAME + " WHERE " + SHOPPING_NAME + " = " + "'" + name + "'";
+        String query = "Select * FROM " + FOOD_TABLE_NAME + " WHERE " + COLUMN_NAME + " = " + "'" + name + "'";
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(query, null);
         Food food = new Food();
