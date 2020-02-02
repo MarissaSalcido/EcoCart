@@ -9,42 +9,39 @@
 
     <Button
         android:id="@+id/carbButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="66dp"
+        android:layout_height="34dp"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginEnd="148dp"
-        android:layout_marginBottom="130dp"
+        android:layout_marginEnd="143dp"
+        android:layout_marginBottom="96dp"
         android:background="@drawable/main_button"
         android:gravity="clip_horizontal|center_horizontal|center_vertical"
         android:text="Carbs" />
 
     <Button
         android:id="@+id/fatButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="70dp"
+        android:layout_height="34dp"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginEnd="148dp"
-        android:layout_marginBottom="64dp"
+        android:layout_marginEnd="139dp"
+        android:layout_marginBottom="45dp"
         android:background="@drawable/main_button"
         android:gravity="clip_horizontal|center_horizontal|center_vertical"
         android:text="fat" />
 
     <ImageView
         android:id="@+id/imageView3"
-        android:layout_width="381dp"
-        android:layout_height="363dp"
-        android:layout_below="@id/nameField"
+        android:layout_width="265dp"
+        android:layout_height="235dp"
         android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginStart="28dp"
-        android:layout_marginTop="1dp"
-        android:layout_marginEnd="2dp"
-        android:layout_marginBottom="367dp"
+        android:layout_marginStart="78dp"
+        android:layout_marginEnd="68dp"
+        android:layout_marginBottom="320dp"
         android:src="@drawable/tree2" />
 
     <TextView
@@ -54,22 +51,22 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentBottom="true"
         android:layout_centerInParent="true"
-        android:layout_marginStart="43dp"
-        android:layout_marginBottom="269dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginBottom="208dp"
         android:fontFamily="casual"
         android:gravity="center"
         android:text="Hello, name! To see how to reduce your food carbon footprint, click on one of the following:"
         android:textColor="#FD030303"
-        android:textSize="20sp" />
+        android:textSize="12sp" />
 
     <Button
         android:id="@+id/proteinButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="71dp"
+        android:layout_height="33dp"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginEnd="148dp"
-        android:layout_marginBottom="196dp"
+        android:layout_marginEnd="141dp"
+        android:layout_marginBottom="148dp"
         android:background="@drawable/main_button"
         android:gravity="clip_horizontal|center_horizontal|center_vertical"
         android:text="protein" />
