@@ -57,7 +57,8 @@
         android:gravity="center"
         android:text="Hello, name! To see how to reduce your food carbon footprint, click on one of the following:"
         android:textColor="#FD030303"
-        android:textSize="12sp" />
+        android:textSize="12sp"
+        android:textStyle="bold" />
 
     <Button
         android:id="@+id/proteinButton"

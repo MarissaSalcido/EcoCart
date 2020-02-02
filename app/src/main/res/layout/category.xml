@@ -37,5 +37,6 @@
         android:fontFamily="casual"
         android:text="Food Type"
         android:textColor="@android:color/black"
-        android:textSize="14sp" />
+        android:textSize="14sp"
+        android:textStyle="bold" />
 </RelativeLayout>

@@ -14,7 +14,9 @@
         android:layout_marginTop="40dp"
         android:fontFamily="casual"
         android:text="Shopping Cart"
+        android:textColor="@android:color/black"
         android:textSize="14sp"
+        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 

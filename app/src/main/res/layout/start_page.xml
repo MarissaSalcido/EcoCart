@@ -86,6 +86,7 @@
         android:fontFamily="casual"
         android:text="CO2 is a greenhouse gas. Emissions are the release of greenhouse gasses into the atmosphere over a specified area and period of time.  A person's carbon footprint is represented by the amount of carbon dioxide and other carbon compounds emitted, expressed here in kg of CO2 per kg of food item produced."
         android:textColor="@android:color/black"
-        android:textSize="12sp" />
+        android:textSize="12sp"
+        android:textStyle="bold" />
 
 </RelativeLayout>
