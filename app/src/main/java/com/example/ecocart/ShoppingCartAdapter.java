@@ -66,28 +66,17 @@ public class ShoppingCartAdapter extends RecyclerView.Adapter<ShoppingCartAdapte
             addItemButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    // do your stuffs
-//                    Log.d("TEST", "clicked");
-//                    System.out.println(v);
-//                    System.out.println(this);
-//                    System.out.println(tvFoodText);
-//
-//                    System.out.println();
+                    String item = tvFoodText.getText().toString();
+                    //database instance of fooddb
+                    //query for the item and create food object
+                    //insert into shoppingcart table
 
-//                    View test = (View) v.getParent();
-//                    test.findViewById(R.id.tvFoodText);
-//                    System.out.println(test);
-
-                    Intent intent = new Intent("add-food");
-                    intent.putExtra("item", tvFoodText.getText());
-                    LocalBroadcastManager.getInstance(context).sendBroadcast(intent);
                 }
             });
 
         }
 
         public void bind(String food) {
-            tvFoodText.setText(food);
         }
 
     }

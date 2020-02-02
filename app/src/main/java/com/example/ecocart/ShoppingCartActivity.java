@@ -16,13 +16,5 @@ public class ShoppingCartActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_shopping_cart);
 
-        /*
-        Intent intent = getIntent();
-        FoodWrapper shoppingCartFoodWrapper = (FoodWrapper) intent.getSerializableExtra("shoppingCart");
-        List<Food> shoppingCart_ = shoppingCartFoodWrapper.getFoods();
-        shoppingCart.addAll(shoppingCart_);
-        System.out.println(shoppingCart.size());
-
-         */
     }
 }

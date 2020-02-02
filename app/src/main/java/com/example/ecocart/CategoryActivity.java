@@ -57,15 +57,9 @@ public class CategoryActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(CategoryActivity.this, ShoppingCartActivity.class);
-                //set up bundle to add shopping cart list, pass bundle to next activity
-                /*FoodWrapper shoppingCartWrapper = new FoodWrapper(foods);
-                intent.putExtra("shoppingCart", shoppingCartWrapper);*/
                 startActivity(intent);
             }
         });
-
-        LocalBroadcastManager.getInstance(this).registerReceiver(mMessageReceiver,
-                new IntentFilter("add-food"));
 
 
     }
