@@ -58,6 +58,7 @@ public class ShoppingCartAdapter extends RecyclerView.Adapter<ShoppingCartAdapte
         TextView tvCartItemCurrentCo2;
         TextView tvCartItemAltCo2;
         TextView tvFoodText5;
+        TextView Differencebtn;
 
 
         public ViewHolder(@NonNull View itemView) {
@@ -67,6 +68,7 @@ public class ShoppingCartAdapter extends RecyclerView.Adapter<ShoppingCartAdapte
             tvCartItemAlt = itemView.findViewById(R.id.tvCartItemAlt);
             tvCartItemAltCo2 = itemView.findViewById(R.id.tvCartItemAltCo2);
             tvFoodText5 = itemView.findViewById(R.id.tvFoodText5);
+            Differencebtn = itemView.findViewById(R.id.Differencebtn);
         }
 
         public void bind(ShoppingCartItem item) {
@@ -91,7 +93,9 @@ public class ShoppingCartAdapter extends RecyclerView.Adapter<ShoppingCartAdapte
 
             tvCartItemAlt.setText(alternative.getName());
             tvCartItemAltCo2.setText(Double.toString(alternative.getCarbonDioxide()*item.getCount()));
-            tvFoodText5.setText(tvFoodText5.getText().toString() + " " +Double.toString((item.getCarbonDioxide()*item.getCount()) - (alternative.getCarbonDioxide()*item.getCount())));
+            tvFoodText5.setText(tvFoodText5.getText().toString());
+            Differencebtn.setText(Double.toString((item.getCarbonDioxide()*item.getCount()) - (alternative.getCarbonDioxide()*item.getCount())));
+
         }
 
     }
