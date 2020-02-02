@@ -2,7 +2,10 @@ package com.example.ecocart;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
+
+import java.util.ArrayList;
 
 public class ShoppingCartActivity extends AppCompatActivity {
 
@@ -10,5 +13,11 @@ public class ShoppingCartActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_shopping_cart);
+
+        Intent intent = getIntent();
+        FoodWrapper shoppingCartFoodWrapper = (FoodWrapper) intent.getSerializableExtra("shoppingCart");
+        ArrayList<Food> shoppingCart = shoppingCartFoodWrapper.getFoods();
+
+        System.out.println(shoppingCart.size());
     }
 }

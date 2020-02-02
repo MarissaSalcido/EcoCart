@@ -1,6 +1,9 @@
 package com.example.ecocart;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -8,6 +11,7 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -17,7 +21,7 @@ import java.util.List;
 
 public class CategoryActivity extends AppCompatActivity {
     RecyclerView rvFoods;
-    List<Food> foods =  new ArrayList<>(Arrays.asList(new Food("Lamb", 39.2, "Protein"), new Food("Beef", 27.2 , "Protein"),
+    ArrayList<Food> foods =  new ArrayList<>(Arrays.asList(new Food("Lamb", 39.2, "Protein"), new Food("Beef", 27.2 , "Protein"),
             new Food("Cheese", 13.5, "Fat"), new Food("Pork", 12.1, "Protein"), new Food("Farmed Salmon", 11.9, "Fat"),
             new Food("Turkey", 10.9, "Protein"), new Food("Chicken", 6.9, "Protein"), new Food("Canned Tune", 6.1, "Fat"),
             new Food("Eggs", 4.8, "Protein"), new Food("Potatoes", 2.9, "Carb"), new Food("Rice", 2.7, "Carb"),
@@ -28,7 +32,7 @@ public class CategoryActivity extends AppCompatActivity {
     FoodAdapter adapter;
     TextView foodTypeTitle;
     ImageButton shoppingCartButton;
-    List<Food> shoppingCart;
+    ArrayList<Food> shoppingCart;
     ImageButton addItemButton;
 
     @Override
@@ -43,10 +47,10 @@ public class CategoryActivity extends AppCompatActivity {
         shoppingCartButton = findViewById(R.id.shoppingCartButton);
         rvFoods = findViewById(R.id.rvfood);
         List<Food> specifiedFoods = new ArrayList<>();
-        FoodDatabase foodDatabase = new FoodDatabase(this, null, null, 1);
-        Log.i("TAG", "Cat onCreate: " +foodDatabase.loadList(foodType));
+        //FoodDatabase foodDatabase = new FoodDatabase(this, null, null, 1);
+        //Log.i("TAG", "Cat onCreate: " +foodDatabase.loadList(foodType));
         specifiedFoods.addAll(foods);
-        adapter = new FoodAdapter(specifiedFoods);
+        adapter = new FoodAdapter(this, specifiedFoods);
         LinearLayoutManager layoutManager = new LinearLayoutManager((this));
         rvFoods.setLayoutManager(layoutManager);
         rvFoods.setAdapter(adapter);
@@ -56,10 +60,27 @@ public class CategoryActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(CategoryActivity.this, ShoppingCartActivity.class);
                 //set up bundle to add shopping cart list, pass bundle to next activity
+                FoodWrapper shoppingCartWrapper = new FoodWrapper(foods);
+                intent.putExtra("shoppingCart", shoppingCartWrapper);
+                startActivity(intent);
             }
         });
 
 
+
+        LocalBroadcastManager.getInstance(this).registerReceiver(mMessageReceiver,
+                new IntentFilter("add-food"));
+
+
     }
+
+    public BroadcastReceiver mMessageReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            // Get extra data included in the Intent
+            String ItemName = intent.getStringExtra("item");
+            //if ()
+        }
+    };
 
 }

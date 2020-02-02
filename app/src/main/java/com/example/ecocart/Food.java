@@ -1,7 +1,12 @@
 
 package com.example.ecocart;
 
-public class Food {
+import java.io.Serializable;
+import java.util.ArrayList;
+
+public class Food implements Serializable {
+
+    private static final long serialVersionUID = 1L;
 
     // fields
     private String name;
