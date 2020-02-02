@@ -32,7 +32,7 @@ public class FoodDatabase extends SQLiteOpenHelper {
 
     public void onCreate(SQLiteDatabase db) {
         String CREATE_TABLE = "CREATE TABLE " + TABLE_NAME + "(" + COLUMN_TYPE +
-                "INTEGER PRIMARYKEY," + COLUMN_CO2 + "INTEGER," + COLUMN_NAME + "TEXT )";
+                "TEXT," + COLUMN_CO2 + "INTEGER," + COLUMN_NAME + "TEXT )";
         db.execSQL(CREATE_TABLE);
     }
 
@@ -88,18 +88,19 @@ public class FoodDatabase extends SQLiteOpenHelper {
         }
     }
 
-    public ArrayList<Food> loadList(String type) {
-        ArrayList<Food> result = new ArrayList(1);
+    public List<Food> loadList(String type) {
+        List<Food> result = new ArrayList<>();
         String query = "Select * FROM " + TABLE_NAME + " WHERE " + COLUMN_TYPE + " = " + "'" + type + "'";
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(query, null);
-        Food food = new Food();
-        while (cursor.moveToNext()) {
+        cursor.moveToFirst();
+        while (!cursor.isAfterLast()) {
+            Food food = new Food();
             food.setType(cursor.getString(0));
             food.setCarbonDioxide(Integer.parseInt(cursor.getString(1)));
             food.setName(cursor.getString(2));
             result.add(food);
-            cursor.close();
+            cursor.moveToNext();
         }
         cursor.close();
         db.close();
