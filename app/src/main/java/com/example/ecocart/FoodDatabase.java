@@ -14,6 +14,7 @@ public class FoodDatabase extends SQLiteOpenHelper {
     private static final int DATABASE_VERSION = 1;
     private static final String DATABASE_NAME = "FoodDB.db";
     public static final String TABLE_NAME = "Food";
+    public static final String COLUMN_ID = "ID";
     public static final String COLUMN_CO2 = "CO2_emissions";
     public static final String COLUMN_TYPE = "FoodType";
     public static final String COLUMN_NAME = "FoodName";
@@ -27,16 +28,19 @@ public class FoodDatabase extends SQLiteOpenHelper {
 
     public FoodDatabase(Context context, String name,
                        SQLiteDatabase.CursorFactory factory, int version) {
-        super(context, DATABASE_NAME, factory, DATABASE_VERSION);
+        super(context, DATABASE_NAME, factory, version);
     }
 
     public void onCreate(SQLiteDatabase db) {
         String CREATE_TABLE = "CREATE TABLE " + TABLE_NAME + "(" + COLUMN_TYPE +
-                "TEXT," + COLUMN_CO2 + "INTEGER," + COLUMN_NAME + "TEXT )";
+                " TEXT, " + COLUMN_CO2 + "  REAL, " + COLUMN_NAME + "  TEXT" + ");";
         db.execSQL(CREATE_TABLE);
     }
 
-    public void onUpgrade(SQLiteDatabase db, int i, int i1) {}
+    public void onUpgrade(SQLiteDatabase db, int i, int i1) {
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
+        onCreate(db);
+    }
 
     public String loadHandler() {
         String result = "";
@@ -44,9 +48,11 @@ public class FoodDatabase extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(query, null);
         while (cursor.moveToNext()) {
-            int result_0 = cursor.getInt(0);
-            String result_1 = cursor.getString(1);
-            result += String.valueOf(result_0) + " " + result_1 +
+            int result_0 = Integer.parseInt(cursor.getString(1));
+            String result_1 = cursor.getString(2);
+            double result_2 = Double.parseDouble(cursor.getString(3));
+            String result_3 = cursor.getString(4);
+            result += String.valueOf(result_0) + " " + result_1 + " " + String.valueOf(result_2) + " " + result_3 +
                     System.getProperty("line.separator");
         }
         cursor.close();
@@ -65,7 +71,7 @@ public class FoodDatabase extends SQLiteOpenHelper {
     }
 
     public Food findHandler(String foodItem) {
-        String query = "Select * FROM " + TABLE_NAME + " WHERE " + COLUMN_NAME + " = " + "'" + foodItem + "'";
+        String query = "Select * FROM " + TABLE_NAME + " WHERE " + COLUMN_NAME + "='" + foodItem + "'";
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(query, null);
         Food food = new Food();
@@ -82,25 +88,23 @@ public class FoodDatabase extends SQLiteOpenHelper {
         return food;
     }
 
-    private void addAll(){
+    public void addAll(){
         for(Food item: foods) {
             addHandler(item);
         }
     }
 
     public List<Food> loadList(String type) {
-        List<Food> result = new ArrayList<>();
+        List<Food> result = new ArrayList<Food>();
         String query = "Select * FROM " + TABLE_NAME + " WHERE " + COLUMN_TYPE + " = " + "'" + type + "'";
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(query, null);
-        cursor.moveToFirst();
-        while (!cursor.isAfterLast()) {
+        while (cursor.moveToNext()) {
             Food food = new Food();
             food.setType(cursor.getString(0));
-            food.setCarbonDioxide(Integer.parseInt(cursor.getString(1)));
+            food.setCarbonDioxide(Double.parseDouble(cursor.getString(1)));
             food.setName(cursor.getString(2));
             result.add(food);
-            cursor.moveToNext();
         }
         cursor.close();
         db.close();
