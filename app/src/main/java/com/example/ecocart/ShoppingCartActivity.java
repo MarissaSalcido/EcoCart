@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class ShoppingCartActivity extends AppCompatActivity {
 
@@ -16,7 +17,7 @@ public class ShoppingCartActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         FoodWrapper shoppingCartFoodWrapper = (FoodWrapper) intent.getSerializableExtra("shoppingCart");
-        ArrayList<Food> shoppingCart = shoppingCartFoodWrapper.getFoods();
+        List<Food> shoppingCart = shoppingCartFoodWrapper.getFoods();
 
         System.out.println(shoppingCart.size());
     }
