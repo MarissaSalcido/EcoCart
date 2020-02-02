@@ -67,7 +67,7 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.ViewHolder> {
                     Food food = db.getFoodItem(item);
                     if (db.findHandler(item) == null){
                         Toast.makeText(context, "Updated shopping list!", Toast.LENGTH_SHORT).show();
-                        ShoppingCartItem newItem = new ShoppingCartItem(food.getName(), food.getCarbonDioxide(), food.getType(), 0);
+                        ShoppingCartItem newItem = new ShoppingCartItem(food.getName(), food.getCarbonDioxide(), food.getType(), 1);
                         db.addToCart(newItem);
                         System.out.println(newItem.getName());
                     }

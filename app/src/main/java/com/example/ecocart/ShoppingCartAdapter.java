@@ -76,31 +76,21 @@ public class ShoppingCartAdapter extends RecyclerView.Adapter<ShoppingCartAdapte
 
 
             tvCartItemCurrent.setText(item.getName());
-            tvCartItemCurrentCo2.setText(Double.toString(item.getCarbonDioxide()));
+            tvCartItemCurrentCo2.setText(Double.toString(item.getCarbonDioxide()*item.getCount()));
 
             //calculate what alternatives to display to ItemAlt and its co2
-/*
-            ShoppingCartItem protein_minimal = db.findHandler("Lentils");
-            ShoppingCartItem carb_minimal = db.findHandler("Tomato");
-            ShoppingCartItem fats_minimal = db.findHandler("Nuts");
 
+            String type = item.getType();
+            List<Food> foods = db.loadList(type);
+            Food alternative = new Food("min", Double.MAX_VALUE, type);
+            for (int i = 0; i < foods.size(); i++){
+                if (foods.get(i).getCarbonDioxide() <= alternative.getCarbonDioxide()){
+                    alternative = foods.get(i);
+                }
+            }
 
-            if (item.getName().equals("Protein")) {
-                tvCartItemAlt.setText(protein_minimal.getName());
-                tvCartItemAltCo2.setText(Double.toString(protein_minimal.getCarbonDioxide()));
-                double difference = item.getCarbonDioxide() - protein_minimal.getCarbonDioxide();
-                tvFoodText5.setText(Double.toString(difference));
-            } else if (item.getName().equals("Carb")) {
-                tvCartItemAlt.setText(carb_minimal.getName());
-                tvCartItemAltCo2.setText(Double.toString(carb_minimal.getCarbonDioxide()));
-                double difference = item.getCarbonDioxide() - carb_minimal.getCarbonDioxide();
-                tvFoodText5.setText(Double.toString(difference));
-            } else {
-                tvCartItemAlt.setText(fats_minimal.getName());
-                tvCartItemAltCo2.setText(Double.toString(fats_minimal.getCarbonDioxide()));
-                double difference = item.getCarbonDioxide() - fats_minimal.getCarbonDioxide();
-                tvFoodText5.setText(Double.toString(difference));
-            }*/
+            tvCartItemAlt.setText(alternative.getName());
+            tvCartItemAltCo2.setText(Double.toString(alternative.getCarbonDioxide()*item.getCount()));
         }
 
     }
