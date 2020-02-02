@@ -6,11 +6,12 @@ import android.content.Context;
 import android.content.ContentValues;
 import android.database.Cursor;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class FoodDatabase extends SQLiteOpenHelper {
+public class FoodDatabase extends SQLiteOpenHelper implements Serializable {
     private static final String DATABASE_NAME = "FoodDB.db";
     public static final String FOOD_TABLE_NAME = "Food";
     public static final String COLUMN_CO2 = "CO2_emissions";

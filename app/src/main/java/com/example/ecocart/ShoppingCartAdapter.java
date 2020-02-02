@@ -1,6 +1,8 @@
 package com.example.ecocart;
 
 import android.content.Context;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,9 +22,9 @@ public class ShoppingCartAdapter extends RecyclerView.Adapter<ShoppingCartAdapte
     public ImageView addItemButton;
     Context context;
 
-
     public ShoppingCartAdapter(Context context) {
         this.context = context;
+        SQLiteDatabase db =
 
     }
 
@@ -56,6 +58,7 @@ public class ShoppingCartAdapter extends RecyclerView.Adapter<ShoppingCartAdapte
         TextView tvCartItemCurrentCo2;
         TextView tvCartItemAltCo2;
 
+
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             tvFoodText = itemView.findViewById(R.id.tvCartItemCurrent);
@@ -69,8 +72,9 @@ public class ShoppingCartAdapter extends RecyclerView.Adapter<ShoppingCartAdapte
                 @Override
                 public void onClick(View v) {
                     String item = tvFoodText.getText().toString();
-
-                    //database instance of fooddb
+                    FoodDatabase db = new FoodDatabase(context, null, null, 1);
+                    //ShoppingCartItem it = db.findHandler(item);
+                    //db.addToCart(it);
                     //query for the item and create food object
                     //insert into shoppingcart table
 
