@@ -11,10 +11,8 @@ import java.util.Arrays;
 import java.util.List;
 
 public class FoodDatabase extends SQLiteOpenHelper {
-    private static final int DATABASE_VERSION = 1;
     private static final String DATABASE_NAME = "FoodDB.db";
-    public static final String TABLE_NAME = "Food";
-    public static final String COLUMN_ID = "ID";
+    public static final String FOOD_TABLE_NAME = "Food";
     public static final String COLUMN_CO2 = "CO2_emissions";
     public static final String COLUMN_TYPE = "FoodType";
     public static final String COLUMN_NAME = "FoodName";
@@ -25,6 +23,12 @@ public class FoodDatabase extends SQLiteOpenHelper {
             new Food("Peanut Butter", 2.5, "Fat"), new Food("Nuts", 2.3, "Fat"), new Food("Yogurt", 2.2, "Fat"),
             new Food("Broccoli", 2.0, "Carb"), new Food("Tofu", 2.0, "Protein"), new Food("Dried Beans", 2.0, "Protein"),
             new Food("2% Milk", 1.9, "Protein"), new Food("Tomato", 1.1, "Carb"), new Food("Lentils", 0.9, "Protein")));
+    public static final String SHOPPING_TABLE_NAME = "Shopping";
+    public static final String SHOPPING_CO2 = "CO2_emissions";
+    public static final String SHOPPING_TYPE = "FoodType";
+    public static final String SHOPPING_NAME = "FoodName";
+    public static final String SHOPPING_AMOUNT = "Amount";
+
 
     public FoodDatabase(Context context, String name,
                        SQLiteDatabase.CursorFactory factory, int version) {
@@ -32,32 +36,18 @@ public class FoodDatabase extends SQLiteOpenHelper {
     }
 
     public void onCreate(SQLiteDatabase db) {
-        String CREATE_TABLE = "CREATE TABLE " + TABLE_NAME + "(" + COLUMN_TYPE +
+        String CREATE_TABLE_FOODS = "CREATE TABLE " + FOOD_TABLE_NAME + "(" + COLUMN_TYPE +
                 " TEXT, " + COLUMN_CO2 + "  REAL, " + COLUMN_NAME + "  TEXT" + ");";
-        db.execSQL(CREATE_TABLE);
+        String CREATE_TABLE_SHOPPING = "CREATE TABLE " + SHOPPING_TABLE_NAME + "(" + SHOPPING_TYPE +
+                " TEXT, " + SHOPPING_CO2 + "  REAL, " + SHOPPING_NAME + "  TEXT, " + SHOPPING_AMOUNT + " INTEGER" + ");";
+        db.execSQL(CREATE_TABLE_FOODS);
+        db.execSQL(CREATE_TABLE_SHOPPING);
     }
 
     public void onUpgrade(SQLiteDatabase db, int i, int i1) {
-        db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
+        db.execSQL("DROP TABLE IF EXISTS " + FOOD_TABLE_NAME);
+        db.execSQL("DROP TABLE IF EXISTS " + SHOPPING_TABLE_NAME);
         onCreate(db);
-    }
-
-    public String loadHandler() {
-        String result = "";
-        String query = "Select * FROM " + TABLE_NAME;
-        SQLiteDatabase db = this.getWritableDatabase();
-        Cursor cursor = db.rawQuery(query, null);
-        while (cursor.moveToNext()) {
-            int result_0 = Integer.parseInt(cursor.getString(1));
-            String result_1 = cursor.getString(2);
-            double result_2 = Double.parseDouble(cursor.getString(3));
-            String result_3 = cursor.getString(4);
-            result += String.valueOf(result_0) + " " + result_1 + " " + String.valueOf(result_2) + " " + result_3 +
-                    System.getProperty("line.separator");
-        }
-        cursor.close();
-        db.close();
-        return result;
     }
 
     public void addHandler(Food food) {
@@ -66,26 +56,35 @@ public class FoodDatabase extends SQLiteOpenHelper {
         values.put(COLUMN_CO2, food.getCarbonDioxide());
         values.put(COLUMN_NAME, food.getName());
         SQLiteDatabase db = this.getWritableDatabase();
-        db.insert(TABLE_NAME, null, values);
+        db.insert(FOOD_TABLE_NAME, null, values);
         db.close();
     }
 
-    public Food findHandler(String foodItem) {
-        String query = "Select * FROM " + TABLE_NAME + " WHERE " + COLUMN_NAME + "='" + foodItem + "'";
+    public void addToCart(ShoppingCartItem shopping)  {
+        ContentValues values = new ContentValues();
+        values.put(SHOPPING_TYPE, shopping.getType());
+        values.put(SHOPPING_CO2, shopping.getCarbonDioxide());
+        values.put(SHOPPING_NAME, shopping.getName());
+        values.put(SHOPPING_AMOUNT, shopping.getCount());
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.insert(SHOPPING_TABLE_NAME, null, values);
+        db.close();
+    }
+
+    public boolean removeFromCart(String name) {
+        boolean result = false;
+        String query = "Select * FROM " + SHOPPING_TABLE_NAME + " WHERE " + SHOPPING_NAME + " = " + "'" + name + "'";
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(query, null);
-        Food food = new Food();
-        if (cursor.moveToFirst()) {
-            cursor.moveToFirst();
-            food.setType(cursor.getString(1));
-            food.setCarbonDioxide(Integer.parseInt(cursor.getString(0)));
-            food.setName(cursor.getString(1));
+        ShoppingCartItem item = new ShoppingCartItem();
+        if(cursor.moveToFirst()) {
+            item.setName(cursor.getString(2));
+            db.delete(SHOPPING_TABLE_NAME, SHOPPING_NAME + "=?", new String[]{item.getName()});
             cursor.close();
-        } else {
-            food = null;
+            result = true;
         }
         db.close();
-        return food;
+        return result;
     }
 
     public void addAll(){
@@ -96,7 +95,7 @@ public class FoodDatabase extends SQLiteOpenHelper {
 
     public List<Food> loadList(String type) {
         List<Food> result = new ArrayList<Food>();
-        String query = "Select * FROM " + TABLE_NAME + " WHERE " + COLUMN_TYPE + " = " + "'" + type + "'";
+        String query = "Select * FROM " + FOOD_TABLE_NAME + " WHERE " + COLUMN_TYPE + " = " + "'" + type + "'";
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(query, null);
         while (cursor.moveToNext()) {
@@ -111,6 +110,23 @@ public class FoodDatabase extends SQLiteOpenHelper {
         return result;
     }
 
+    public List<ShoppingCartItem> loadCart(String type) {
+        List<ShoppingCartItem> result = new ArrayList<ShoppingCartItem>();
+        String query = "Select * FROM " + FOOD_TABLE_NAME + " WHERE " + SHOPPING_TYPE + " = " + "'" + type + "'";
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(query, null);
+        while (cursor.moveToNext()) {
+            ShoppingCartItem item = new ShoppingCartItem();
+            item.setType(cursor.getString(0));
+            item.setCarbonDioxide(Double.parseDouble(cursor.getString(1)));
+            item.setName(cursor.getString(2));
+            item.setCount(Integer.parseInt(cursor.getString(3)));
+            result.add(item);
+        }
+        cursor.close();
+        db.close();
+        return result;
+    }
     //public boolean updateHandler(int ID, String name) {}
 
 }
