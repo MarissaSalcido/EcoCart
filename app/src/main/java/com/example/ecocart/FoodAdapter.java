@@ -42,7 +42,6 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.ViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 
-        //String food = String.valueOf(foods.get(position)); // might need to fix
         String food = foods.get(position).getName();
         holder.bind(food);
     }
@@ -54,25 +53,37 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.ViewHolder> {
 
     class ViewHolder extends RecyclerView.ViewHolder {
 
-        TextView tvFoodText;
+        TextView tvFoodItem;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            tvFoodText = itemView.findViewById(R.id.tvCartItemCurrent);
+            tvFoodItem = itemView.findViewById(R.id.tvFoodItem);
             addItemButton = itemView.findViewById(R.id.addItemButton);
-
-
             addItemButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    //Update shopping cart database
+                    String item = tvFoodItem.getText().toString();
+                    FoodDatabase db = new FoodDatabase(context, null, null, 17);
+                    Food food = db.getFoodItem(item);
+                    if (db.findHandler(item) == null){
+                        Toast.makeText(context, "Updated shopping list!", Toast.LENGTH_SHORT).show();
+                        ShoppingCartItem newItem = new ShoppingCartItem(food.getName(), food.getCarbonDioxide(), food.getType(), 0);
+                        db.addToCart(newItem);
+                        System.out.println(newItem.getName());
+                    }
+                    else{
+                        ShoppingCartItem newItem = db.findHandler(item);
+                        db.removeFromCart(newItem.getName());
+                        ShoppingCartItem addedItem = new ShoppingCartItem(newItem.getName(), newItem.getCarbonDioxide(), newItem.getType(), newItem.getCount()+1);
+                        db.addToCart(addedItem);
+                        Toast.makeText(context, "Updated shopping list!", Toast.LENGTH_SHORT).show();
+                    }
                 }
             });
-
         }
 
         public void bind(String food) {
-            tvFoodText.setText(food);
+            tvFoodItem.setText(food);
         }
 
     }

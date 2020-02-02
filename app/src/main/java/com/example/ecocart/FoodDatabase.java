@@ -146,7 +146,7 @@ public class FoodDatabase extends SQLiteOpenHelper implements Serializable {
 
     public List<ShoppingCartItem> loadCart(String type) {
         List<ShoppingCartItem> result = new ArrayList<ShoppingCartItem>();
-        String query = "Select * FROM " + FOOD_TABLE_NAME + " WHERE " + SHOPPING_TYPE + " = " + "'" + type + "'";
+        String query = "Select * FROM " + SHOPPING_TABLE_NAME + " WHERE " + SHOPPING_TYPE + " = " + "'" + type + "'";
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(query, null);
         while (cursor.moveToNext()) {

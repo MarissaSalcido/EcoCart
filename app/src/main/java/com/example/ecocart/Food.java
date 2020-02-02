@@ -1,12 +1,12 @@
 
 package com.example.ecocart;
 
-import org.parceler.Parcel;
+//import org.parceler.Parcel;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 
-@Parcel
+//@Parcel
 public class Food {
 
 

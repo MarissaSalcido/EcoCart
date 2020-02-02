@@ -9,12 +9,13 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class ShoppingCartActivity extends AppCompatActivity {
-    List<Food> shoppingCart = new ArrayList<>();
+    List<ShoppingCartItem> shoppingCart = new ArrayList<>();
     ShoppingCartAdapter adapter;
     RecyclerView rvshopping;
 
@@ -24,16 +25,20 @@ public class ShoppingCartActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_shopping_cart);
-
+        rvshopping = findViewById(R.id.rvshopping);
 
         String foodType = getIntent().getStringExtra("foodType");
 
-
-        adapter = new ShoppingCartAdapter(this);
+        FoodDatabase db = new FoodDatabase(this, null, null, 17);
+        List<ShoppingCartItem> items = new ArrayList<>();
+        items.addAll(db.loadCart("Protein"));
+        items.addAll(db.loadCart("Fat"));
+        items.addAll(db.loadCart("Carb"));
+        shoppingCart.addAll(items);
+        adapter = new ShoppingCartAdapter(this, shoppingCart);
         LinearLayoutManager layoutManager = new LinearLayoutManager((this));
         rvshopping.setLayoutManager(layoutManager);
         rvshopping.setAdapter(adapter);
-
 
         donebtn = findViewById(R.id.donebtn);
 
