@@ -58,8 +58,6 @@ public class CategoryActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(CategoryActivity.this, ShoppingCartActivity.class);
-                //send fooddb in bundle to next activity
-
                 startActivity(intent);
             }
         });

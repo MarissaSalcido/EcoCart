@@ -1,11 +1,14 @@
 package com.example.ecocart;
 
 import android.content.Context;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -19,7 +22,6 @@ public class ShoppingCartAdapter extends RecyclerView.Adapter<ShoppingCartAdapte
     List<ShoppingCartItem> cart;
     public ImageView addItemButton;
     Context context;
-
 
     public ShoppingCartAdapter(Context context) {
         this.context = context;
@@ -56,6 +58,7 @@ public class ShoppingCartAdapter extends RecyclerView.Adapter<ShoppingCartAdapte
         TextView tvCartItemCurrentCo2;
         TextView tvCartItemAltCo2;
 
+
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             tvFoodText = itemView.findViewById(R.id.tvCartItemCurrent);
@@ -69,11 +72,17 @@ public class ShoppingCartAdapter extends RecyclerView.Adapter<ShoppingCartAdapte
                 @Override
                 public void onClick(View v) {
                     String item = tvFoodText.getText().toString();
-
-                    //database instance of fooddb
-                    //query for the item and create food object
-                    //insert into shoppingcart table
-
+                    FoodDatabase db = new FoodDatabase(context, null, null, 1);
+                    Food food = db.getFoodItem(item);
+                    if (db.findHandler(item) == null){
+                        db.addToCart(new ShoppingCartItem(food.getName(), food.getCarbonDioxide(), food.getType(), 0));
+                    }
+                    else{
+                        ShoppingCartItem newItem = db.findHandler(item);
+                        db.removeFromCart(newItem.getName());
+                        db.addToCart(new ShoppingCartItem(newItem.getName(), newItem.getCarbonDioxide(), newItem.getType(), newItem.getCount()+1));
+                        Toast.makeText(context, "Updated shopping list!", Toast.LENGTH_SHORT).show();
+                    }
                 }
             });
 
