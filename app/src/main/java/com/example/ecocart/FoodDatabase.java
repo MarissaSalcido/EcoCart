@@ -39,7 +39,7 @@ public class FoodDatabase extends SQLiteOpenHelper {
         String CREATE_TABLE_FOODS = "CREATE TABLE " + FOOD_TABLE_NAME + "(" + COLUMN_TYPE +
                 " TEXT, " + COLUMN_CO2 + "  REAL, " + COLUMN_NAME + "  TEXT" + ");";
         String CREATE_TABLE_SHOPPING = "CREATE TABLE " + SHOPPING_TABLE_NAME + "(" + SHOPPING_TYPE +
-                " TEXT, " + SHOPPING_CO2 + "  REAL, " + SHOPPING_NAME + "  TEXT" + SHOPPING_AMOUNT + "TEXT" + ");";
+                " TEXT, " + SHOPPING_CO2 + "  REAL, " + SHOPPING_NAME + "  TEXT, " + SHOPPING_AMOUNT + " INTEGER" + ");";
         db.execSQL(CREATE_TABLE_FOODS);
         db.execSQL(CREATE_TABLE_SHOPPING);
     }
@@ -65,13 +65,26 @@ public class FoodDatabase extends SQLiteOpenHelper {
         values.put(SHOPPING_TYPE, shopping.getType());
         values.put(SHOPPING_CO2, shopping.getCarbonDioxide());
         values.put(SHOPPING_NAME, shopping.getName());
-        values.put(SHOPPING_AMOUNT, shopping.getAmount());
+        values.put(SHOPPING_AMOUNT, shopping.getCount());
         SQLiteDatabase db = this.getWritableDatabase();
         db.insert(SHOPPING_TABLE_NAME, null, values);
         db.close();
     }
 
-    public void removeFromCart(ShoppingCartItem shopping) {
+    public boolean removeFromCart(String name) {
+        boolean result = false;
+        String query = "Select * FROM " + SHOPPING_TABLE_NAME + " WHERE " + SHOPPING_NAME + " = " + "'" + name + "'";
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(query, null);
+        ShoppingCartItem item = new ShoppingCartItem();
+        if(cursor.moveToFirst()) {
+            item.setName(cursor.getString(2));
+            db.delete(SHOPPING_TABLE_NAME, SHOPPING_NAME + "=?", new String[]{item.getName()});
+            cursor.close();
+            result = true;
+        }
+        db.close();
+        return result;
     }
 
     public void addAll(){
@@ -104,9 +117,10 @@ public class FoodDatabase extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery(query, null);
         while (cursor.moveToNext()) {
             ShoppingCartItem item = new ShoppingCartItem();
-            ShoppingCartItem.setType(cursor.getString(0));
-            ShoppingCartItem.setCarbonDioxide(Double.parseDouble(cursor.getString(1)));
-            ShoppingCartItem.setName(cursor.getString(2));
+            item.setType(cursor.getString(0));
+            item.setCarbonDioxide(Double.parseDouble(cursor.getString(1)));
+            item.setName(cursor.getString(2));
+            item.setCount(Integer.parseInt(cursor.getString(3)));
             result.add(item);
         }
         cursor.close();
