@@ -57,6 +57,7 @@ public class ShoppingCartAdapter extends RecyclerView.Adapter<ShoppingCartAdapte
         TextView tvCartItemAlt;
         TextView tvCartItemCurrentCo2;
         TextView tvCartItemAltCo2;
+        TextView tvFoodText5;
 
 
         public ViewHolder(@NonNull View itemView) {
@@ -66,6 +67,7 @@ public class ShoppingCartAdapter extends RecyclerView.Adapter<ShoppingCartAdapte
             tvCartItemAlt = itemView.findViewById(R.id.tvCartItemAlt);
             tvCartItemCurrentCo2 = itemView.findViewById(R.id.tvCartItemCurrentCo2);
             tvCartItemAltCo2 = itemView.findViewById(R.id.tvCartItemAltCo2);
+            tvFoodText5 = itemView.findViewById(R.id.tvFoodText5);
 
             addItemButton = itemView.findViewById(R.id.addItemButton);
             addItemButton.setOnClickListener(new View.OnClickListener() {
@@ -90,9 +92,47 @@ public class ShoppingCartAdapter extends RecyclerView.Adapter<ShoppingCartAdapte
 
         public void bind(ShoppingCartItem item) {
 
+            // a database of shopping cart item
+            FoodDatabase db = new FoodDatabase(context, null, null, 1);
+
+
             tvCartItemCurrent.setText(item.getName());
             tvCartItemCurrentCo2.setText(Double.toString(item.getCarbonDioxide()));
+
             //calculate what alternatives to display to ItemAlt and its co2
+
+            ShoppingCartItem protein_minimal = db.findHandler("Lentils");
+            ShoppingCartItem carb_minimal = db.findHandler("Tomato");
+            ShoppingCartItem fats_minimal = db.findHandler("Nuts");
+
+
+
+            if (item.getName().equals("Protein"))
+            {
+                tvCartItemAlt.setText(protein_minimal.getName());
+                tvCartItemAltCo2.setText(Double.toString(protein_minimal.getCarbonDioxide()));
+                double difference = item.getCarbonDioxide() - protein_minimal.getCarbonDioxide();
+                tvFoodText5.setText(Double.toString(difference));
+            }
+
+            else if (item.getName().equals("Carb"))
+            {
+                tvCartItemAlt.setText(carb_minimal.getName());
+                tvCartItemAltCo2.setText(Double.toString(carb_minimal.getCarbonDioxide()));
+                double difference = item.getCarbonDioxide() - carb_minimal.getCarbonDioxide();
+                tvFoodText5.setText(Double.toString(difference));
+            }
+
+            else
+            {
+                tvCartItemAlt.setText(fats_minimal.getName());
+                tvCartItemAltCo2.setText(Double.toString(fats_minimal.getCarbonDioxide()));
+                double difference = item.getCarbonDioxide() - fats_minimal.getCarbonDioxide();
+                tvFoodText5.setText(Double.toString(difference));
+            }
+
+
+
 
 
         }
